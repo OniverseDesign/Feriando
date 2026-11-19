@@ -1,0 +1,33 @@
+name: Sugerir una mejora o función
+description: ¿Tienes una idea para hacer Feriando aún más útil en tus ferias? ¡Compártela aquí!
+title: "[Sugerencia]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ¡Nos encanta escuchar ideas de feriantes y emprendedores! Cuéntanos tu propuesta.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: ¿Qué necesidad o problema resuelve?
+      description: Cuéntanos en qué situación de la feria te gustaría tener esta mejora.
+      placeholder: Ej. Cuando vendo en efectivo y me pagan con un billete grande, necesito calcular el vuelto rápido...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: ¿Cómo te imaginas la solución?
+      description: Describe brevemente cómo te gustaría que funcione en la app.
+      placeholder: Ej. Un campo opcional de "Paga con" al momento de confirmar el cobro en efectivo.
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto adicional
+      description: Opcional: ejemplos, bocetos o cualquier otro detalle que ayude a entender la idea.

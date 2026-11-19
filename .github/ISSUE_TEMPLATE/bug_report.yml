@@ -1,0 +1,56 @@
+name: Reportar un error (Bug)
+description: Cuéntanos si algo no funciona como debería para poder corregirlo.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por ayudar a mejorar **Feriando**. Por favor completa la siguiente información con el mayor detalle posible.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción del error
+      description: ¿Qué ocurrió exactamente y qué esperabas que pasara?
+      placeholder: Ej. Al registrar una venta con promo 2x, el total calculado no coincide...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Pasos para reproducir
+      description: Indica los pasos exactos para volver a provocar el problema.
+      placeholder: |
+        1. Ir a 'Punto de Venta'
+        2. Agregar 2 productos de la familia 'Stickers'
+        3. Tocar 'Cobrar'
+        4. Ver el error...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: device
+    attributes:
+      label: Dispositivo donde ocurrió
+      options:
+        - Android (Chrome / PWA instalada)
+        - iPhone / iPad (Safari / PWA instalada)
+        - PC / Mac (Chrome / Edge / Firefox)
+        - Otro
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Versión o navegador
+      description: Ej. v1.0.0 en Chrome 130, Safari iOS 18, etc.
+      placeholder: v1.0.0
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Capturas o información adicional
+      description: Puedes pegar capturas de pantalla o detalles extra aquí.

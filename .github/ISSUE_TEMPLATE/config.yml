@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: ☕ Apoyar el proyecto en Cafecito
+    url: https://cafecito.app/oniverse
+    about: Si Feriando te ayuda en tus ferias, puedes invitar un cafecito para apoyar su desarrollo.
+  - name: 🌐 Abrir Feriando en GitHub Pages
+    url: https://oniversedesign.github.io/Feriando/
+    about: Accede directamente a la aplicación web e instálala como PWA.
