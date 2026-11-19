@@ -25,6 +25,14 @@ export function applyTheme(mode: ThemeMode): void {
   if (typeof document === 'undefined') return;
   const dark = isDarkActive(mode);
   document.documentElement.classList.toggle('dark', dark);
+  if (document.documentElement.style) {
+    document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+  }
+
+  const metaScheme = document.querySelector('meta[name="color-scheme"]');
+  if (metaScheme) {
+    metaScheme.setAttribute('content', dark ? 'dark' : 'light');
+  }
 
   const themeColor = dark ? '#141218' : '#F3EDF7';
   const metaTheme = document.querySelector('meta[name="theme-color"]');

@@ -236,7 +236,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
         createPortal(
           <div
             className={`m3-pop fixed ${
-              cart.length > 0 ? 'bottom-36' : 'bottom-24'
+              cart.length > 0 ? 'bottom-40' : 'bottom-24'
             } lg:bottom-6 left-1/2 z-70 -translate-x-1/2 rounded-full bg-on-surface px-5 py-2.5 text-xs font-bold text-surface shadow-lg`}
           >
             {flashMessage}
@@ -670,7 +670,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
           <>
             {/* Floating Docked Bar (Collapsed) */}
             {!isCartExpanded && !isCartClosing && (
-              <div className="fixed bottom-[calc(4.5rem+max(0.75rem,env(safe-area-inset-bottom)))] left-1/2 z-50 w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 will-change-transform lg:hidden">
+              <div className="fixed bottom-[calc(5rem+max(0.75rem,env(safe-area-inset-bottom)))] left-1/2 z-50 w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 will-change-transform lg:hidden">
                 <div className="flex items-center justify-between gap-2 rounded-full bg-surface-container-high p-2 pr-2.5 shadow-xl ring-1 ring-outline-variant/40">
                   {/* Tap to expand chevron & total */}
                   <button

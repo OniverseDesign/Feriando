@@ -45,7 +45,7 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({
   return (
     <nav
       aria-label="Navegación principal"
-      className="fixed left-1/2 -translate-x-1/2 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-40 inline-flex w-fit max-w-[calc(100vw-2rem)] items-center justify-center gap-2 rounded-full bg-surface-container-lowest p-1.5 shadow-lg ring-1 ring-outline-variant/50 will-change-transform lg:hidden"
+      className="fixed left-1/2 -translate-x-1/2 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-40 inline-flex h-16 w-fit max-w-[calc(100vw-2rem)] items-center justify-center gap-1.5 rounded-full bg-surface-container-lowest p-2 shadow-lg ring-1 ring-outline-variant/50 will-change-transform lg:hidden"
     >
       {NAV_ITEMS.map((item) => {
         const active = currentTab === item.key;
@@ -56,15 +56,15 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({
             onClick={() => onSelectTab(item.key)}
             aria-current={active ? "page" : undefined}
             aria-label={item.label}
-            className={`m3-nav-pill h-11 text-sm font-bold ${
+            className={`m3-nav-pill h-12 text-sm font-bold ${
               active
-                ? `${item.activeClass} px-3.5 shadow-xs`
-                : "text-on-surface-variant hover:bg-surface-container-low px-2.5"
+                ? `${item.activeClass} px-4 shadow-xs`
+                : "text-on-surface-variant hover:bg-surface-container-low px-3"
             }`}
           >
             <Icon
               name={item.icon}
-              size={22}
+              size={24}
               filled={active}
               className={`shrink-0 transition-transform duration-200 ease-out ${
                 active ? "scale-105" : "scale-100"
@@ -87,7 +87,7 @@ export const DesktopNavbar: React.FC<NavigationBarProps> = ({
   return (
     <nav
       aria-label="Navegación principal escritorio"
-      className="inline-flex items-center gap-4 rounded-full bg-surface-container-lowest py-1.5 pl-6 pr-1.5 shadow-sm ring-1 ring-outline-variant/40"
+      className="inline-flex h-16 items-center gap-4 rounded-full bg-surface-container-lowest py-2 pl-6 pr-2 shadow-sm ring-1 ring-outline-variant/40"
     >
       {/* Logo de la app dentro de la navbar a la izquierda en color de acento */}
       <button
@@ -96,14 +96,14 @@ export const DesktopNavbar: React.FC<NavigationBarProps> = ({
         className="flex items-center rounded-full py-1 pr-1 transition-opacity hover:opacity-85 focus:outline-none"
         aria-label="Feriando - Ir a Ferias"
       >
-        <AppLogo className="h-5 w-auto text-primary" />
+        <AppLogo className="h-5.5 w-auto text-primary" />
       </button>
 
       {/* Divisor sutil */}
-      <div className="h-5 w-px bg-outline-variant/40" />
+      <div className="h-6 w-px bg-outline-variant/40" />
 
       {/* Botones de navegación a la derecha */}
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-1.5">
         {NAV_ITEMS.map((item) => {
           const active = currentTab === item.key;
           return (
@@ -112,7 +112,7 @@ export const DesktopNavbar: React.FC<NavigationBarProps> = ({
               type="button"
               onClick={() => onSelectTab(item.key)}
               aria-current={active ? "page" : undefined}
-              className={`m3-nav-pill px-4 py-2 gap-2 text-sm font-bold active:scale-95 ${
+              className={`m3-nav-pill h-12 px-4 gap-2 text-sm font-bold active:scale-95 ${
                 active
                   ? `${item.activeClass} shadow-xs`
                   : "text-on-surface-variant hover:bg-surface-container-low"
@@ -120,7 +120,7 @@ export const DesktopNavbar: React.FC<NavigationBarProps> = ({
             >
               <Icon
                 name={item.icon}
-                size={20}
+                size={22}
                 filled={active}
                 className={`shrink-0 transition-transform duration-200 ease-out ${
                   active ? "scale-105" : "scale-100"

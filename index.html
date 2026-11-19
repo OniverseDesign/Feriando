@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#F3EDF7" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F3EDF7" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141218" />
-    <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <link rel="apple-touch-icon" href="./icon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,10 +29,17 @@
           var isDark = mode === 'dark' || (mode === 'system' && prefersDark);
           if (isDark) {
             document.documentElement.classList.add('dark');
+            document.documentElement.style.colorScheme = 'dark';
+            var metaScheme = document.querySelector('meta[name="color-scheme"]');
+            if (metaScheme) metaScheme.setAttribute('content', 'dark');
             var metas = document.querySelectorAll('meta[name="theme-color"]');
             metas.forEach(function(meta) {
               meta.setAttribute('content', '#141218');
             });
+          } else {
+            document.documentElement.style.colorScheme = 'light';
+            var metaSchemeLight = document.querySelector('meta[name="color-scheme"]');
+            if (metaSchemeLight) metaSchemeLight.setAttribute('content', 'light');
           }
         } catch (e) {}
       })();

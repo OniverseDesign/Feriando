@@ -47,8 +47,13 @@
 }
 
 @layer base {
+  :root {
+    color-scheme: light;
+  }
+
   html.dark,
   :root.dark {
+    color-scheme: dark;
     /* M3 Baseline Dark Color Roles */
     --color-primary: #D0BCFF;
     --color-on-primary: #381E72;

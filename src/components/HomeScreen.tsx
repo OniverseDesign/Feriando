@@ -278,7 +278,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           type="button"
           onClick={onCreateNew}
           aria-label="Crear Nueva Feria"
-          className="fixed bottom-[calc(max(0.75rem,env(safe-area-inset-bottom))+4.25rem)] right-4 z-40 inline-flex h-14 items-center gap-2 rounded-[20px] bg-primary px-5 text-sm font-bold tracking-wide text-on-primary shadow-lg hover:shadow-xl active:scale-95 transition-[transform,box-shadow] duration-200 will-change-transform sm:hidden"
+          className="fixed bottom-[calc(max(0.75rem,env(safe-area-inset-bottom))+4.75rem)] right-4 z-40 inline-flex h-14 items-center gap-2 rounded-[20px] bg-primary px-5 text-sm font-bold tracking-wide text-on-primary shadow-lg hover:shadow-xl active:scale-95 transition-[transform,box-shadow] duration-200 will-change-transform sm:hidden"
         >
           <Icon name="add" size={24} />
           <span>Nueva Feria</span>
