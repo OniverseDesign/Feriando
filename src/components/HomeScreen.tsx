@@ -316,26 +316,28 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 <div
                   key={evt.id}
                   onClick={() => {
-                    if (!isSelected) {
+                    if (isSelected) {
+                      onOpenPos(evt.id);
+                    } else {
                       onSelectEvent?.(evt.id);
                     }
                   }}
-                  role={!isSelected ? 'button' : undefined}
-                  tabIndex={!isSelected ? 0 : undefined}
-                  onKeyDown={
-                    !isSelected
-                      ? (e) => {
-                          if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            onSelectEvent?.(evt.id);
-                          }
-                        }
-                      : undefined
-                  }
-                  className={`group relative flex flex-col justify-between transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(0.38,1.21,0.22,1.00)] ${
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      if (isSelected) {
+                        onOpenPos(evt.id);
+                      } else {
+                        onSelectEvent?.(evt.id);
+                      }
+                    }
+                  }}
+                  className={`group relative flex flex-col justify-between transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(0.38,1.21,0.22,1.00)] cursor-pointer select-none ${
                     isSelected
-                      ? 'rounded-[32px] p-6 shadow-md hover:shadow-xl'
-                      : 'rounded-[24px] p-5 shadow-sm hover:shadow-lg hover:-translate-y-0.5 cursor-pointer select-none'
+                      ? 'rounded-[32px] p-6 shadow-md hover:shadow-xl hover:-translate-y-0.5'
+                      : 'rounded-[24px] p-5 shadow-sm hover:shadow-lg hover:-translate-y-0.5'
                   } ${theme.cardBg}`}
                 >
                   <div>
