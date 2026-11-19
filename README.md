@@ -7,24 +7,24 @@
 
   <p>
     <a href="https://oniversedesign.github.io/Feriando/">
-      <img src="https://img.shields.io/badge/Abrir_App-GitHub_Pages-cba6f7?style=for-the-badge&logo=githubpages&logoColor=11111b" alt="Abrir App en GitHub Pages" />
+      <img src="https://img.shields.io/badge/Abrir_App-Feriando-cba6f7?style=for-the-badge" alt="Abrir App Feriando" />
     </a>
     <a href="https://oniversedesign.github.io/Feriando/">
-      <img src="https://img.shields.io/badge/PWA-Offline_First-89b4fa?style=for-the-badge&logo=pwa&logoColor=11111b" alt="PWA Offline-First" />
+      <img src="https://img.shields.io/badge/PWA-Offline_First-89b4fa?style=for-the-badge" alt="PWA Offline-First" />
     </a>
     <a href="LICENSE">
       <img src="https://img.shields.io/badge/Licencia-MIT-74c7ec?style=for-the-badge" alt="Licencia MIT" />
     </a>
     <a href="https://cafecito.app/oniverse">
-      <img src="https://img.shields.io/badge/Cafecito-Apoyar-FF5E5B?style=for-the-badge&logo=buymeacoffee&logoColor=white" alt="Donar en Cafecito" />
+      <img src="https://img.shields.io/badge/Cafecito-Apoyar-FF5E5B?style=for-the-badge" alt="Donar en Cafecito" />
     </a>
   </p>
 
   <p>
-    <img src="https://img.shields.io/badge/React-19-89dceb?style=for-the-badge&logo=react&logoColor=11111b" alt="React 19" />
-    <img src="https://img.shields.io/badge/TypeScript-5.8-89b4fa?style=for-the-badge&logo=typescript&logoColor=11111b" alt="TypeScript 5.8" />
-    <img src="https://img.shields.io/badge/Tailwind_CSS-4-94e2d5?style=for-the-badge&logo=tailwindcss&logoColor=11111b" alt="Tailwind CSS 4" />
-    <img src="https://img.shields.io/badge/Vite-6-cba6f7?style=for-the-badge&logo=vite&logoColor=11111b" alt="Vite 6" />
+    <img src="https://img.shields.io/badge/React-19-89dceb?style=for-the-badge" alt="React 19" />
+    <img src="https://img.shields.io/badge/TypeScript-5.8-89b4fa?style=for-the-badge" alt="TypeScript 5.8" />
+    <img src="https://img.shields.io/badge/Tailwind_CSS-4-94e2d5?style=for-the-badge" alt="Tailwind CSS 4" />
+    <img src="https://img.shields.io/badge/Vite-6-cba6f7?style=for-the-badge" alt="Vite 6" />
   </p>
 </div>
 
@@ -128,7 +128,7 @@ npm run build
 Si **Feriando** te resulta útil en tus ferias y emprendimientos, puedes invitar un cafecito para apoyar su mantenimiento y nuevas funciones:
 
 <a href="https://cafecito.app/oniverse">
-  <img src="https://img.shields.io/badge/Cafecito-Apoyar-FF5E5B?style=for-the-badge&logo=buymeacoffee&logoColor=white" alt="Donar en Cafecito" />
+  <img src="https://img.shields.io/badge/Cafecito-Apoyar-FF5E5B?style=for-the-badge" alt="Donar en Cafecito" />
 </a>
 
 ---
