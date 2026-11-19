@@ -18,11 +18,13 @@ import { SmoothCollapse } from './SmoothCollapse';
 interface SetupScreenProps {
   event: FeriaEvent;
   onUpdateEvent: (updated: FeriaEvent) => void;
+  onFinish: () => void;
 }
 
 export const SetupScreen: React.FC<SetupScreenProps> = ({
   event,
   onUpdateEvent,
+  onFinish,
 }) => {
   const [openSections, setOpenSections] = useState({
     participants: true,
@@ -1243,6 +1245,18 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
           </div>
           </SmoothCollapse>
         </section>
+
+        {/* Acción final para pasar a la pantalla del evento actual (Caja) */}
+        <div className="flex justify-end pt-2">
+          <button
+            type="button"
+            onClick={onFinish}
+            className="m3-btn-md w-full sm:w-auto bg-primary text-sm font-bold text-on-primary shadow-md hover:opacity-95"
+          >
+            <Icon name="point_of_sale" size={20} />
+            Finalizar e ir a Caja
+          </button>
+        </div>
       </main>
     </div>
   );

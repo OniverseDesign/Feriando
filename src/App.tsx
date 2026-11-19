@@ -396,7 +396,11 @@ export function App() {
           )}
           {eventSubTab === 'results' && <ResultsScreen event={activeEvent} />}
           {eventSubTab === 'setup' && (
-            <SetupScreen event={activeEvent} onUpdateEvent={handleUpdateEvent} />
+            <SetupScreen
+              event={activeEvent}
+              onUpdateEvent={handleUpdateEvent}
+              onFinish={() => setEventSubTab('pos')}
+            />
           )}
         </div>
       )}
