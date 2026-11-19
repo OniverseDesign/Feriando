@@ -26,9 +26,16 @@ export function applyTheme(mode: ThemeMode): void {
   const dark = isDarkActive(mode);
   document.documentElement.classList.toggle('dark', dark);
 
+  const themeColor = dark ? '#141218' : '#F3EDF7';
   const metaTheme = document.querySelector('meta[name="theme-color"]');
   if (metaTheme) {
-    metaTheme.setAttribute('content', dark ? '#141218' : '#F3EDF7');
+    metaTheme.setAttribute('content', themeColor);
+  }
+  if (typeof document.querySelectorAll === 'function') {
+    const allMetas = document.querySelectorAll('meta[name="theme-color"]');
+    allMetas.forEach((meta) => {
+      meta.setAttribute('content', themeColor);
+    });
   }
 }
 

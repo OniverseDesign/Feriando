@@ -349,7 +349,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
                   <button
                     type="button"
                     onClick={() => setIsSalesExpanded((prev) => !prev)}
-                    className="flex h-8 w-8 aspect-square shrink-0 items-center justify-center rounded-full bg-surface-container text-on-surface hover:bg-surface-container-highest active:scale-90 transition-all border border-outline-variant/30 shadow-2xs"
+                    className="flex h-8 w-8 aspect-square shrink-0 items-center justify-center rounded-full bg-surface-container text-on-surface hover:bg-surface-container-highest active:scale-90 transition-[transform,background-color] duration-150 border border-outline-variant/30 shadow-2xs"
                     aria-expanded={isSalesExpanded}
                     aria-label={isSalesExpanded ? 'Contraer ventas' : 'Ver todas las ventas'}
                   >
@@ -670,8 +670,8 @@ export const PosScreen: React.FC<PosScreenProps> = ({
           <>
             {/* Floating Docked Bar (Collapsed) */}
             {!isCartExpanded && !isCartClosing && (
-              <div className="fixed bottom-[calc(4.5rem+max(0.75rem,env(safe-area-inset-bottom)))] left-1/2 z-50 w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 lg:hidden">
-                <div className="flex items-center justify-between gap-2 rounded-full bg-surface-container-high/95 p-2 pr-2.5 shadow-xl ring-1 ring-outline-variant/40 backdrop-blur-md">
+              <div className="fixed bottom-[calc(4.5rem+max(0.75rem,env(safe-area-inset-bottom)))] left-1/2 z-50 w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 will-change-transform lg:hidden">
+                <div className="flex items-center justify-between gap-2 rounded-full bg-surface-container-high p-2 pr-2.5 shadow-xl ring-1 ring-outline-variant/40">
                   {/* Tap to expand chevron & total */}
                   <button
                     type="button"
@@ -725,7 +725,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
             {/* Expanded Bottom Sheet Modal */}
             {(isCartExpanded || isCartClosing) && (
               <div
-                className={`fixed inset-0 z-60 flex flex-col justify-end bg-black/60 backdrop-blur-sm lg:hidden ${
+                className={`fixed inset-0 z-60 flex flex-col justify-end bg-black/65 lg:hidden ${
                   isCartClosing ? 'm3-backdrop-exit' : 'm3-backdrop-enter'
                 }`}
               >
@@ -746,7 +746,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
                       <button
                         type="button"
                         onClick={closeCartSheet}
-                        className="flex h-10 w-10 aspect-square shrink-0 items-center justify-center rounded-full bg-surface-container-high text-on-surface hover:bg-surface-container-highest active:scale-90 transition-all border border-outline-variant/40 shadow-2xs"
+                        className="flex h-10 w-10 aspect-square shrink-0 items-center justify-center rounded-full bg-surface-container-high text-on-surface hover:bg-surface-container-highest active:scale-90 transition-[transform,background-color] duration-150 border border-outline-variant/40 shadow-2xs"
                         aria-label="Cerrar detalle del carrito"
                       >
                         <Icon name="expand_more" size={24} />

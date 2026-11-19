@@ -430,16 +430,16 @@ export function formatMoney(amount: number): string {
 
 export function generateWhatsAppSummary(event: FeriaEvent, results: EventResults): string {
   const lines: string[] = [];
-  lines.push(`📊 *Resumen — ${event.name}* (${event.date})`);
+  lines.push(`*Resumen — ${event.name}* (${event.date})`);
   lines.push(
-    `💰 Recaudación total: *${formatMoney(results.totalRevenue)}* (${results.salesCount} ventas)`
+    `Recaudación total: *${formatMoney(results.totalRevenue)}* (${results.salesCount} ventas)`
   );
   lines.push(
-    `💵 Efectivo (pozo): ${formatMoney(results.cashTotal)} | 📱 Transf: ${formatMoney(results.transferTotal)}`
+    `Efectivo (pozo): ${formatMoney(results.cashTotal)} | Transf: ${formatMoney(results.transferTotal)}`
   );
 
   if (results.totalExpenses > 0) {
-    lines.push(`🧾 Gastos del stand: ${formatMoney(results.totalExpenses)}`);
+    lines.push(`Gastos del stand: ${formatMoney(results.totalExpenses)}`);
   }
 
   lines.push('');
@@ -453,7 +453,7 @@ export function generateWhatsAppSummary(event: FeriaEvent, results: EventResults
   }
 
   lines.push('');
-  lines.push('*⚖️ Liquidación de Caja:*');
+  lines.push('*Liquidación de Caja:*');
   if (results.transferSettlements.length > 0) {
     for (const t of results.transferSettlements) {
       lines.push(`• ${t.from.name} transfiere *${formatMoney(t.amount)}* a ${t.to.name}`);
@@ -472,7 +472,7 @@ export function generateWhatsAppSummary(event: FeriaEvent, results: EventResults
 
   if (results.topProducts.length > 0) {
     lines.push('');
-    lines.push('*🏆 Lo más vendido:*');
+    lines.push('*Lo más vendido:*');
     results.topProducts.slice(0, 5).forEach((p, idx) => {
       lines.push(`${idx + 1}. ${p.productName} — ${p.unitsSold} u. (${formatMoney(p.revenue)})`);
     });

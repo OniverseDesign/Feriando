@@ -90,7 +90,7 @@
     --color-outline-variant: #49454F;
   }
 
-  body {
+  html, body {
     background-color: var(--color-surface);
     color: var(--color-on-surface);
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -100,8 +100,12 @@
     touch-action: manipulation;
   }
 
-  /* Minimal ultra-thin scrollbar across all platforms and browsers */
-  * {
+  /* Minimal ultra-thin scrollbar on scrollable containers */
+  html,
+  body,
+  .overflow-y-auto,
+  .overflow-x-auto,
+  .overflow-auto {
     scrollbar-width: thin;
     scrollbar-color: rgba(121, 116, 126, 0.35) transparent;
   }
@@ -147,7 +151,6 @@
     word-wrap: normal;
     direction: ltr;
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: 'liga';
     font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
@@ -200,6 +203,7 @@
 
 .m3-page-transition {
   animation: m3-view-enter 380ms var(--m3-ease-spring-default);
+  contain: layout style;
 }
 
 /* M3 Expressive Playful Pop (Badges, Dialogs, Floating counters) */
@@ -285,18 +289,24 @@
 
 .m3-sheet-enter {
   animation: m3-sheet-slide-up 380ms var(--m3-ease-spring-default) forwards;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 .m3-sheet-exit {
   animation: m3-sheet-slide-down 300ms var(--m3-ease-spring-fast) forwards;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 .m3-backdrop-enter {
   animation: m3-backdrop-fade-in 250ms var(--m3-ease-effects-default) forwards;
+  will-change: opacity;
 }
 
 .m3-backdrop-exit {
   animation: m3-backdrop-fade-out 250ms var(--m3-ease-effects-default) forwards;
+  will-change: opacity;
 }
 
 /* M3 Smooth Collapsible Grid (Universal Smooth Accordion) */
@@ -480,14 +490,14 @@
     white-space: nowrap;
     user-select: none;
     transition:
-      padding 380ms cubic-bezier(0.38, 1.21, 0.22, 1.00),
-      background-color 200ms cubic-bezier(0.31, 0.94, 0.34, 1.00),
-      color 200ms cubic-bezier(0.31, 0.94, 0.34, 1.00),
-      box-shadow 200ms cubic-bezier(0.31, 0.94, 0.34, 1.00),
-      transform 350ms cubic-bezier(0.42, 1.67, 0.21, 0.90);
+      padding 260ms cubic-bezier(0.2, 0, 0, 1),
+      background-color 200ms ease,
+      color 200ms ease,
+      box-shadow 200ms ease,
+      transform 120ms ease;
   }
   .m3-nav-pill:active:not(:disabled) {
-    transform: scale(0.95);
+    transform: scale(0.96);
   }
 
   /* M3 Expressive Pill Expandable Label */
@@ -501,13 +511,13 @@
     white-space: nowrap;
     pointer-events: none;
     transition:
-      max-width 380ms cubic-bezier(0.38, 1.21, 0.22, 1.00),
-      margin-left 380ms cubic-bezier(0.38, 1.21, 0.22, 1.00),
-      opacity 180ms cubic-bezier(0.31, 0.94, 0.34, 1.00);
+      max-width 260ms cubic-bezier(0.2, 0, 0, 1),
+      margin-left 260ms cubic-bezier(0.2, 0, 0, 1),
+      opacity 180ms ease;
   }
 
   .m3-pill-label.active {
-    max-width: 16rem;
+    max-width: 8rem;
     opacity: 1;
     margin-left: 0.5rem;
     pointer-events: auto;
@@ -515,7 +525,7 @@
 
   @media (min-width: 640px) {
     .m3-pill-label.sm-expanded {
-      max-width: 16rem;
+      max-width: 8rem;
       opacity: 1;
       margin-left: 0.5rem;
       pointer-events: auto;

@@ -181,7 +181,7 @@ export function App() {
   return (
     <div className="min-h-screen bg-surface text-on-surface">
       {/* Top App Bar: Mobile centered logo | Desktop unified navbar centered */}
-      <header className="sticky top-0 z-30 bg-transparent backdrop-blur">
+      <header className="sticky top-0 z-30 bg-surface">
         <div className="mx-auto flex max-w-7xl items-center justify-center px-4 py-2.5 sm:px-6">
           {/* Mobile view (<lg): Logo strictly centered in accent color */}
           <div className="flex w-full items-center justify-center lg:hidden">
@@ -251,7 +251,7 @@ export function App() {
                     type="button"
                     onClick={() => setEventSubTab('pos')}
                     aria-label="Volver a Caja"
-                    className="flex h-10 w-10 sm:h-11 sm:w-11 aspect-square shrink-0 items-center justify-center rounded-full bg-surface-container text-on-surface hover:bg-surface-container-highest active:scale-90 transition-all border border-outline-variant/30 shadow-2xs"
+                    className="flex h-10 w-10 sm:h-11 sm:w-11 aspect-square shrink-0 items-center justify-center rounded-full bg-surface-container text-on-surface hover:bg-surface-container-highest active:scale-90 transition-[transform,background-color] duration-150 border border-outline-variant/30 shadow-2xs"
                     title="Volver a Caja"
                   >
                     <Icon name="arrow_back" size={22} />
@@ -276,7 +276,7 @@ export function App() {
                     aria-label="Más opciones de la feria"
                     aria-haspopup="true"
                     aria-expanded={eventMenuOpen}
-                    className={`flex h-10 w-10 items-center justify-center rounded-full transition-all active:scale-90 ${
+                    className={`flex h-10 w-10 items-center justify-center rounded-full transition-[transform,background-color,color] duration-150 active:scale-90 ${
                       eventMenuOpen
                         ? 'bg-surface-container-highest text-on-surface'
                         : 'text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface'

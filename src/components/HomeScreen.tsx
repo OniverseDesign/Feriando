@@ -278,7 +278,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           type="button"
           onClick={onCreateNew}
           aria-label="Crear Nueva Feria"
-          className="fixed bottom-[calc(max(0.75rem,env(safe-area-inset-bottom))+4.25rem)] right-4 z-40 inline-flex h-14 items-center gap-2 rounded-[20px] bg-primary px-5 text-sm font-bold tracking-wide text-on-primary shadow-lg hover:shadow-xl active:scale-95 transition-all duration-200 sm:hidden"
+          className="fixed bottom-[calc(max(0.75rem,env(safe-area-inset-bottom))+4.25rem)] right-4 z-40 inline-flex h-14 items-center gap-2 rounded-[20px] bg-primary px-5 text-sm font-bold tracking-wide text-on-primary shadow-lg hover:shadow-xl active:scale-95 transition-[transform,box-shadow] duration-200 will-change-transform sm:hidden"
         >
           <Icon name="add" size={24} />
           <span>Nueva Feria</span>
@@ -332,7 +332,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                         }
                       : undefined
                   }
-                  className={`group relative flex flex-col justify-between transition-all duration-400 ease-[cubic-bezier(0.38,1.21,0.22,1.00)] ${
+                  className={`group relative flex flex-col justify-between transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(0.38,1.21,0.22,1.00)] ${
                     isSelected
                       ? 'rounded-[32px] p-6 shadow-md hover:shadow-xl'
                       : 'rounded-[24px] p-5 shadow-sm hover:shadow-lg hover:-translate-y-0.5 cursor-pointer select-none'
@@ -462,7 +462,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                             e.stopPropagation();
                             onOpenResults(evt.id);
                           }}
-                          className={`m3-btn-sm text-sm font-bold active:scale-95 transition-all ${theme.btnSecondary}`}
+                          className={`m3-btn-sm text-sm font-bold ${theme.btnSecondary}`}
                         >
                           <Icon name="bar_chart" size={18} />
                           Resultados
@@ -473,7 +473,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                             e.stopPropagation();
                             onOpenPos(evt.id);
                           }}
-                          className={`m3-btn-sm text-sm font-bold active:scale-95 transition-all ${theme.btnPrimary}`}
+                          className={`m3-btn-sm text-sm font-bold ${theme.btnPrimary}`}
                         >
                           <Icon name="point_of_sale" size={18} />
                           Ir a Vender

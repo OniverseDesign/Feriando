@@ -45,7 +45,7 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({
   return (
     <nav
       aria-label="Navegación principal"
-      className="fixed left-1/2 -translate-x-1/2 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-40 inline-flex w-fit max-w-[calc(100vw-2rem)] items-center justify-center gap-2 rounded-full bg-surface-container-lowest/95 p-1.5 shadow-lg ring-1 ring-outline-variant/50 backdrop-blur-md lg:hidden"
+      className="fixed left-1/2 -translate-x-1/2 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-40 inline-flex w-fit max-w-[calc(100vw-2rem)] items-center justify-center gap-2 rounded-full bg-surface-container-lowest p-1.5 shadow-lg ring-1 ring-outline-variant/50 will-change-transform lg:hidden"
     >
       {NAV_ITEMS.map((item) => {
         const active = currentTab === item.key;
@@ -62,7 +62,14 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({
                 : "text-on-surface-variant hover:bg-surface-container-low px-2.5"
             }`}
           >
-            <Icon name={item.icon} size={22} filled={active} className={active ? 'm3-pop' : ''} />
+            <Icon
+              name={item.icon}
+              size={22}
+              filled={active}
+              className={`shrink-0 transition-transform duration-200 ease-out ${
+                active ? "scale-105" : "scale-100"
+              }`}
+            />
             <span className={`m3-pill-label ${active ? "active" : ""}`}>
               {item.label}
             </span>
@@ -105,13 +112,20 @@ export const DesktopNavbar: React.FC<NavigationBarProps> = ({
               type="button"
               onClick={() => onSelectTab(item.key)}
               aria-current={active ? "page" : undefined}
-              className={`m3-nav-pill px-4 py-2 gap-2 text-sm font-bold active:scale-95 transition-all duration-300 ${
+              className={`m3-nav-pill px-4 py-2 gap-2 text-sm font-bold active:scale-95 ${
                 active
                   ? `${item.activeClass} shadow-xs`
                   : "text-on-surface-variant hover:bg-surface-container-low"
               }`}
             >
-              <Icon name={item.icon} size={20} filled={active} className={active ? 'm3-pop' : ''} />
+              <Icon
+                name={item.icon}
+                size={20}
+                filled={active}
+                className={`shrink-0 transition-transform duration-200 ease-out ${
+                  active ? "scale-105" : "scale-100"
+                }`}
+              />
               <span>{item.label}</span>
             </button>
           );

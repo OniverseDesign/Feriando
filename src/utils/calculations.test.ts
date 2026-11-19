@@ -3,6 +3,7 @@ import {
   calculateCartTotals,
   calculateEventResults,
   calculateOptimalFamilyTotal,
+  generateWhatsAppSummary,
   prorateInteger,
 } from './calculations';
 import type { FeriaEvent, Product, PromoFamily } from '../types';
@@ -150,5 +151,62 @@ describe('calculateEventResults', () => {
     expect(res.transferSettlements).toHaveLength(0);
     expect(cris.cashFromPot).toBe(0);
     expect(nov.cashFromPot).toBe(4000);
+  });
+});
+
+describe('generateWhatsAppSummary', () => {
+  it('generates export summary text without any emojis', () => {
+    const event: FeriaEvent = {
+      id: 'evt_1',
+      name: 'Anime Fest',
+      date: '2026-11-18',
+      status: 'active',
+      transferMode: 'individual',
+      singleTransferOwnerId: null,
+      participants: [
+        { id: 'p_1', name: 'Cristian', color: '#0061A4' },
+        { id: 'p_2', name: 'Novia', color: '#984061' },
+      ],
+      sharedEntities: [],
+      promoFamilies: [],
+      products: [],
+      expenses: [
+        {
+          id: 'exp_1',
+          description: 'Stand',
+          amount: 1500,
+          paidBy: 'p_1',
+          splitEqually: true,
+          splits: [],
+        },
+      ],
+      sales: [
+        {
+          id: 's1',
+          timestamp: '2026-11-18T12:00:00Z',
+          items: [
+            { productId: 'a', productName: 'Sticker', ownerId: 'p_1', effectivePrice: 2000 },
+          ],
+          finalTotal: 2000,
+          paymentMethod: 'cash',
+          receivedBy: null,
+        },
+      ],
+    };
+
+    const results = calculateEventResults(event);
+    const summary = generateWhatsAppSummary(event, results);
+
+    // Emoji regex checking that no extended pictographic or emoji characters exist in the text
+    const emojiRegex = /\p{Extended_Pictographic}/u;
+    expect(emojiRegex.test(summary)).toBe(false);
+
+    expect(summary).toContain('*Resumen — Anime Fest* (2026-11-18)');
+    expect(summary).toContain('Recaudación total:');
+    expect(summary).toContain('Efectivo (pozo):');
+    expect(summary).toContain('Gastos del stand:');
+    expect(summary).toContain('*Liquidación de Caja:*');
+    expect(summary).toContain('*Lo más vendido:*');
+    expect(summary).toContain('1. Sticker — 1 u.');
   });
 });
