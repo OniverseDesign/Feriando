@@ -79,3 +79,8 @@ export interface CartEntry {
   productId: string;
   quantity: number;
 }
+
+export interface EventCartState {
+  cart: CartEntry[];
+  customTotal: number | null;
+}

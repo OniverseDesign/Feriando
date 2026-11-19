@@ -10,18 +10,26 @@ import { SmoothCollapse } from './SmoothCollapse';
 
 interface PosScreenProps {
   event: FeriaEvent;
+  cart: CartEntry[];
+  customTotal: number | null;
+  onCartChange: (updater: (prev: CartEntry[]) => CartEntry[]) => void;
+  onCustomTotalChange: (total: number | null) => void;
+  onClearCart: () => void;
   onUpdateEvent: (updated: FeriaEvent) => void;
   onOpenSetup: () => void;
 }
 
 export const PosScreen: React.FC<PosScreenProps> = ({
   event,
+  cart: rawCart,
+  customTotal,
+  onCartChange,
+  onCustomTotalChange,
+  onClearCart,
   onUpdateEvent,
   onOpenSetup,
 }) => {
-  const [cart, setCart] = useState<CartEntry[]>([]);
   const [selectedFamily, setSelectedFamily] = useState<string>('all');
-  const [customTotal, setCustomTotal] = useState<number | null>(null);
   const [showRegateo, setShowRegateo] = useState(false);
   const [regateoInput, setRegateoInput] = useState('');
   const [showTransferPicker, setShowTransferPicker] = useState(false);
@@ -29,6 +37,11 @@ export const PosScreen: React.FC<PosScreenProps> = ({
   const [isCartClosing, setIsCartClosing] = useState(false);
   const [isSalesExpanded, setIsSalesExpanded] = useState(false);
   const [flashMessage, setFlashMessage] = useState<string | null>(null);
+
+  const cart = useMemo(() => {
+    const productIds = new Set(event.products.map((p) => p.id));
+    return rawCart.filter((c) => c.quantity > 0 && productIds.has(c.productId));
+  }, [rawCart, event.products]);
 
   const closeCartSheet = () => {
     setIsCartClosing(true);
@@ -63,7 +76,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
   }, [event.products, selectedFamily]);
 
   const addToCart = (productId: string) => {
-    setCart((prev) => {
+    onCartChange((prev) => {
       const existing = prev.find((c) => c.productId === productId);
       if (existing) {
         return prev.map((c) =>
@@ -76,7 +89,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
   };
 
   const updateCartQty = (productId: string, delta: number) => {
-    setCart((prev) =>
+    onCartChange((prev) =>
       prev
         .map((c) =>
           c.productId === productId ? { ...c, quantity: c.quantity + delta } : c
@@ -86,8 +99,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
   };
 
   const clearCart = () => {
-    setCart([]);
-    setCustomTotal(null);
+    onClearCart();
     setShowRegateo(false);
     setShowTransferPicker(false);
     if (isCartExpanded) {
@@ -590,7 +602,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
                         onClick={() => {
                           const parsed = parseInt(regateoInput, 10);
                           if (!isNaN(parsed) && parsed >= 0) {
-                            setCustomTotal(parsed);
+                            onCustomTotalChange(parsed);
                           }
                           setShowRegateo(false);
                         }}
@@ -602,7 +614,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
                         <button
                           type="button"
                           onClick={() => {
-                            setCustomTotal(null);
+                            onCustomTotalChange(null);
                             setShowRegateo(false);
                           }}
                           className="m3-btn-xs text-xs font-bold text-on-tertiary-container hover:bg-tertiary-container"
@@ -887,7 +899,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
                           onClick={() => {
                             const parsed = parseInt(regateoInput, 10);
                             if (!isNaN(parsed) && parsed >= 0) {
-                              setCustomTotal(parsed);
+                              onCustomTotalChange(parsed);
                             }
                             setShowRegateo(false);
                           }}
@@ -899,7 +911,7 @@ export const PosScreen: React.FC<PosScreenProps> = ({
                           <button
                             type="button"
                             onClick={() => {
-                              setCustomTotal(null);
+                              onCustomTotalChange(null);
                               setShowRegateo(false);
                             }}
                             className="m3-btn-xs text-xs font-bold text-on-tertiary-container hover:bg-tertiary-container"

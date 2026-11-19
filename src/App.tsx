@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import type { FeriaEvent } from './types';
+import type { CartEntry, EventCartState, FeriaEvent } from './types';
 import {
   createId,
   duplicateEvent,
+  loadCarts,
   loadEvents,
+  saveCarts,
   saveEvents,
 } from './utils/storage';
 import { formatMoney } from './utils/calculations';
@@ -28,6 +30,9 @@ function pickInitialEventId(events: FeriaEvent[]): string | null {
 
 export function App() {
   const [events, setEvents] = useState<FeriaEvent[]>(() => loadEvents());
+  const [cartsByEvent, setCartsByEvent] = useState<Record<string, EventCartState>>(() =>
+    loadCarts()
+  );
   const [mainTab, setMainTab] = useState<MainTab>('ferias');
   const [eventSubTab, setEventSubTab] = useState<EventSubTab>('pos');
   const [activeEventId, setActiveEventId] = useState<string | null>(() =>
@@ -38,6 +43,10 @@ export function App() {
   useEffect(() => {
     saveEvents(events);
   }, [events]);
+
+  useEffect(() => {
+    saveCarts(cartsByEvent);
+  }, [cartsByEvent]);
 
   // Synchronize theme mode on mount and listen to system OS dark mode changes
   useEffect(() => {
@@ -145,6 +154,12 @@ export function App() {
       }
       return remaining;
     });
+    setCartsByEvent((prev) => {
+      if (!(eventId in prev)) return prev;
+      const next = { ...prev };
+      delete next[eventId];
+      return next;
+    });
   };
 
   const handleImportEvents = (imported: FeriaEvent[]) => {
@@ -169,7 +184,50 @@ export function App() {
   const handleClearAllData = () => {
     setEvents([]);
     setActiveEventId(null);
+    setCartsByEvent({});
     setMainTab('ferias');
+  };
+
+  const handleCartChange = (eventId: string, updater: (prev: CartEntry[]) => CartEntry[]) => {
+    setCartsByEvent((prev) => {
+      const current = prev[eventId] ?? { cart: [], customTotal: null };
+      const nextCart = updater(current.cart);
+      if (nextCart.length === 0) {
+        if (!(eventId in prev)) return prev;
+        const next = { ...prev };
+        delete next[eventId];
+        return next;
+      }
+      return {
+        ...prev,
+        [eventId]: { ...current, cart: nextCart },
+      };
+    });
+  };
+
+  const handleCustomTotalChange = (eventId: string, customTotal: number | null) => {
+    setCartsByEvent((prev) => {
+      const current = prev[eventId] ?? { cart: [], customTotal: null };
+      if (current.cart.length === 0 && customTotal === null) {
+        if (!(eventId in prev)) return prev;
+        const next = { ...prev };
+        delete next[eventId];
+        return next;
+      }
+      return {
+        ...prev,
+        [eventId]: { ...current, customTotal },
+      };
+    });
+  };
+
+  const handleClearCart = (eventId: string) => {
+    setCartsByEvent((prev) => {
+      if (!(eventId in prev)) return prev;
+      const next = { ...prev };
+      delete next[eventId];
+      return next;
+    });
   };
 
   const openEventWorkspace = (id: string, subTab: EventSubTab) => {
@@ -390,6 +448,11 @@ export function App() {
           {eventSubTab === 'pos' && (
             <PosScreen
               event={activeEvent}
+              cart={cartsByEvent[activeEvent.id]?.cart ?? []}
+              customTotal={cartsByEvent[activeEvent.id]?.customTotal ?? null}
+              onCartChange={(updater) => handleCartChange(activeEvent.id, updater)}
+              onCustomTotalChange={(total) => handleCustomTotalChange(activeEvent.id, total)}
+              onClearCart={() => handleClearCart(activeEvent.id)}
               onUpdateEvent={handleUpdateEvent}
               onOpenSetup={() => setEventSubTab('setup')}
             />

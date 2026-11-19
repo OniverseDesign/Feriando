@@ -1,7 +1,8 @@
-import type { FeriaEvent } from '../types';
+import type { CartEntry, EventCartState, FeriaEvent } from '../types';
 import { harmonizeColorToM3 } from './m3Palette';
 
 const STORAGE_KEY = 'feria_pos_events_v1';
+const CARTS_STORAGE_KEY = 'feria_pos_carts_v1';
 
 export function loadEvents(): FeriaEvent[] {
   try {
@@ -36,6 +37,55 @@ export function loadEvents(): FeriaEvent[] {
 
 export function saveEvents(events: FeriaEvent[]): void {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
+}
+
+export function loadCarts(): Record<string, EventCartState> {
+  try {
+    const raw = localStorage.getItem(CARTS_STORAGE_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return {};
+
+    const result: Record<string, EventCartState> = {};
+    for (const [eventId, value] of Object.entries(parsed)) {
+      if (!value || typeof value !== 'object') continue;
+      const candidate = value as { cart?: unknown; customTotal?: unknown };
+      const cart: CartEntry[] = Array.isArray(candidate.cart)
+        ? candidate.cart.filter(
+            (entry): entry is CartEntry =>
+              Boolean(entry) &&
+              typeof entry === 'object' &&
+              typeof (entry as CartEntry).productId === 'string' &&
+              typeof (entry as CartEntry).quantity === 'number' &&
+              Number.isFinite((entry as CartEntry).quantity) &&
+              (entry as CartEntry).quantity > 0
+          )
+        : [];
+      const customTotal =
+        typeof candidate.customTotal === 'number' &&
+        Number.isFinite(candidate.customTotal) &&
+        candidate.customTotal >= 0
+          ? candidate.customTotal
+          : null;
+
+      if (cart.length > 0 || customTotal !== null) {
+        result[eventId] = { cart, customTotal };
+      }
+    }
+    return result;
+  } catch {
+    return {};
+  }
+}
+
+export function saveCarts(carts: Record<string, EventCartState>): void {
+  const nonEmpty: Record<string, EventCartState> = {};
+  for (const [eventId, state] of Object.entries(carts)) {
+    if (state.cart.length > 0 || state.customTotal !== null) {
+      nonEmpty[eventId] = state;
+    }
+  }
+  localStorage.setItem(CARTS_STORAGE_KEY, JSON.stringify(nonEmpty));
 }
 
 export function createId(prefix: string): string {
