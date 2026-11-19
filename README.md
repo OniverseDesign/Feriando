@@ -13,7 +13,7 @@
       <img src="https://img.shields.io/badge/PWA-Offline_First-89b4fa?style=for-the-badge" alt="PWA Offline-First" />
     </a>
     <a href="LICENSE">
-      <img src="https://img.shields.io/badge/Licencia-MIT-74c7ec?style=for-the-badge" alt="Licencia MIT" />
+      <img src="https://img.shields.io/badge/Licencia-GPL_v3-74c7ec?style=for-the-badge" alt="Licencia GPL v3" />
     </a>
     <a href="https://cafecito.app/oniverse">
       <img src="https://img.shields.io/badge/Cafecito-Apoyar-FF5E5B?style=for-the-badge" alt="Donar en Cafecito" />
@@ -136,4 +136,4 @@ Si **Feriando** te resulta útil en tus ferias y emprendimientos, puedes invitar
 ## Autor y Licencia
 
 Desarrollado por **Oniverse** ([OniverseDesign](https://github.com/OniverseDesign)).
-Distribuido bajo la licencia [MIT](LICENSE).
+Distribuido bajo la licencia [GNU General Public License v3.0](LICENSE).
