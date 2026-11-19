@@ -33,6 +33,18 @@
 
 ---
 
+## Capturas de pantalla (Versión móvil)
+
+<div align="center">
+
+| Mis Ferias | Configurar Feria | Feria Actual (Caja) | Carrito | Compra Registrada |
+| :---: | :---: | :---: | :---: | :---: |
+| <img src="public/Screenshots/Ferias.jpg" alt="Mis Ferias" width="170" /> | <img src="public/Screenshots/Configurar%20Feria.jpg" alt="Configurar Feria" width="170" /> | <img src="public/Screenshots/Feria%20Actual.jpg" alt="Feria Actual" width="170" /> | <img src="public/Screenshots/Carrito.jpg" alt="Carrito" width="170" /> | <img src="public/Screenshots/Compra%20registrada.jpg" alt="Compra registrada" width="170" /> |
+
+</div>
+
+---
+
 ## Características principales
 
 - **100% Offline-First e instalable (PWA):** Todos los datos se guardan localmente en el dispositivo (`localStorage`). Funciona sin señal en parques o predios y puede instalarse en la pantalla de inicio en Android, iOS y escritorio.
